@@ -16,7 +16,10 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
-        new ExtractTextPlugin('[name].css')
+        // new ExtractTextPlugin('[name].css')
+        new ExtractTextPlugin('./app/bundle.css', {
+            allChunks: true
+        })
     ],
 
     devServer: {
