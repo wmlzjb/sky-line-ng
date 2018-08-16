@@ -1,7 +1,7 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var helpers = require('./helpers');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
+const helpers = require('./helpers');
 
 module.exports = {
     entry: {
@@ -16,15 +16,16 @@ module.exports = {
     },
 
     module: {
-        rules: [{
-                test: /\.ts$/,
-                loaders: [{
-                    loader: 'awesome-typescript-loader',
-                    options: {
-                        tsconfig: helpers.root('src', 'tsconfig.app.json')
-                    }
-                }, 'angular2-template-loader']
-            },
+        rules: [
+            // {
+            //     test: /\.ts$/,
+            //     loaders: [{
+            //         loader: 'awesome-typescript-loader',
+            //         options: {
+            //             tsconfig: helpers.root('src', 'tsconfig.app.json')
+            //         }
+            //     }, 'angular2-template-loader']
+            // },
             {
                 test: /\.html$/,
                 use: 'raw-loader',
@@ -44,20 +45,32 @@ module.exports = {
                 use: ['to-string-loader', 'css-loader', 'sass-loader'],
                 exclude: [helpers.root('src', 'styles')]
             },
+            {
+                test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+                use: [{
+                    loader: '@angular-devkit/build-optimizer/webpack-loader',
+                    options: { sourceMap: true }
+                }, '@ngtools/webpack']
+            },
+            {
+                test: /\.js$/,
+                use: [{
+                    loader: '@angular-devkit/build-optimizer/webpack-loader',
+                    options: { sourceMap: true }
+                }]
+            }
         ]
     },
 
     plugins: [
-        new webpack.ContextReplacementPlugin(
-            // The (\\|\/) piece accounts for path separators in *nix and Windows
-            /angular(\\|\/)core(\\|\/)(@angular|fesm5)/,
-            helpers.root('./src'), // location of your src
-            {} // a map of your routes
-        ),
-
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: ['app', 'vendor', 'polyfills']
-        // }),
+        new AngularCompilerPlugin({
+            tsConfigPath: helpers.root('src', 'tsconfig.app.json'),
+            entryModule: helpers.root('src/app', 'app.module#AppModule'),
+            sourceMap: true,
+            compilerOptions: {
+                module: 'commonjs'
+            }
+        }),
 
         new webpack.optimize.SplitChunksPlugin({
             chunks: "all",
