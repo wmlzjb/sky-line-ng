@@ -4,10 +4,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
+
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { MainModule } from './main/main.module';
 import { CoreModule } from './core/core.module';
+
+import { reducers, metaReducers } from './reducers';
 
 const appRoutes: Routes = [
     { path: '**', redirectTo: '/user/login' }
@@ -23,6 +27,8 @@ const appRoutes: Routes = [
         HttpClientModule,
         HttpModule,
         RouterModule.forRoot(appRoutes, { useHash: true }),
+        StoreModule.forRoot(reducers, { metaReducers }),
+
         CoreModule,
         UserModule,
         MainModule

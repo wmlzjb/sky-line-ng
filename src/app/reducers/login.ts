@@ -11,22 +11,20 @@ const initialState: State = {
 export function reducer(state = initialState, action: login.Actions): State {
     switch (action.type) {
         case login.LOGIN_PADDING:
-            return {
-                isLogin: false,
+            return Object.assign({}, state, {
                 isLoading: true
-            };
+            });
         case login.LOGIN_SUCCESS:
-            return {
-                isLogin: true,
-                isLoading: false
-            };
+            return Object.assign({}, state, {
+                isLogin: true
+            });
         case login.LOGIN_ERROR:
-            return {
-                isLogin: false,
-                isLoading: false
-            };
+            return Object.assign({}, state);
 
         default:
             return state;
     }
 }
+
+export const getLoading = (state: State) => state.isLoading;
+export const getLogin = (state: State) => state.isLogin;

@@ -13,6 +13,8 @@ export class LoginSuccessAction implements Action {
 }
 export class LoginErrorAction implements Action {
     readonly type = LOGIN_ERROR;
+
+    constructor(public payload: string) { }
 }
 
 
