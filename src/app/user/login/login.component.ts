@@ -27,8 +27,5 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.store.dispatch(new login.LoginPaddingAction());
-        this.isLoading$.subscribe(state => {
-            console.log(state);
-        });
     }
 }

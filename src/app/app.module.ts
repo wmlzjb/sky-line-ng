@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 
+import '../styles/styles.scss';
+
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { MainModule } from './main/main.module';
