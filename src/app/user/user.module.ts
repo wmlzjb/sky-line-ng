@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
-import { LayoutComponent } from './layout.component';
-import { LoginComponent } from './login/login.component';
+
 import { SharedModule } from '../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
+
+// import { LayoutComponent } from './layout.component';
+// import { LoginComponent } from './login/login.component';
+import { LayoutComponent } from './new-ui/layout.component';
+import { LoginComponent } from './new-ui/login/login.component';
 
 const routes: Routes = [
     {
