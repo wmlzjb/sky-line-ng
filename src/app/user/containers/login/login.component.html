@@ -1,0 +1,24 @@
+<div class="lg-card">
+    <div class="lg-logo">sky-line</div>
+    <div class="lg-elem">
+        <div class="lg-user-name">
+            <div class="input-div">
+                <input type="text" placeholder="LOGIN" [(ngModel)]="userName" />
+            </div>
+        </div>
+        <div class="lg-user-pwd">
+            <div class="input-div">
+                <input type="text" placeholder="PASSWORD" [(ngModel)]="password" />
+            </div>
+        </div>
+        <div class="lg-user-btn"> Forgot Password?</div>
+    </div>
+    <div class="lg-bottom">
+        <div class="lg-bottom-title">
+            Don't have an account?
+        </div>
+        <div class="lg-bottom-title lg-bottom-btn" (click)="login()">
+            <span>{{loginPage.isLoading?'PADDING...':'LOG IN'}}</span>
+        </div>
+    </div>
+</div>

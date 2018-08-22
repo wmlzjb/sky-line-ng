@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import '../styles/styles.scss';
 
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
         HttpModule,
         RouterModule.forRoot(appRoutes, { useHash: true }),
         StoreModule.forRoot(reducers, { metaReducers }),
+        EffectsModule.forRoot([]),
 
         CoreModule,
         UserModule,

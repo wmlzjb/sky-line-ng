@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-// import { LayoutComponent } from './layout.component';
-// import { LoginComponent } from './login/login.component';
-import { LayoutComponent } from './new-ui/layout.component';
-import { LoginComponent } from './new-ui/login/login.component';
+import { reducers } from './reducers';
+import { LoginEffects } from './effects/login.effects';
+
+import { LayoutComponent } from './containers/layout/layout.component';
+import { LoginComponent } from './containers/login/login.component';
 
 const routes: Routes = [
     {
@@ -20,7 +23,9 @@ const routes: Routes = [
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        StoreModule.forFeature('login', reducers),
+        EffectsModule.forFeature([LoginEffects]),
     ],
     exports: [],
     declarations: [

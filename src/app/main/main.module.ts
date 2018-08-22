@@ -7,6 +7,10 @@ const appRoutes: Routes = [
     {
         path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
         children: [
+            {
+                path: 'dashboard',
+                loadChildren: '../dashboard/dashboard.module#DashboardModule'
+            },
             { path: '', redirectTo: '/user/login', pathMatch: 'full' }
         ]
     }

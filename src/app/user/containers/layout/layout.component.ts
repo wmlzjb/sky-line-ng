@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-user-layout',
+    selector: 'app-user-new-ui-layout',
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss']
 })
