@@ -11,12 +11,10 @@
                 <input type="text" placeholder="PASSWORD" [(ngModel)]="password" />
             </div>
         </div>
-        <div class="lg-user-btn"> Forgot Password?</div>
+        <div class="lg-user-btn">Forgot Password?</div>
     </div>
     <div class="lg-bottom">
-        <div class="lg-bottom-title">
-            Don't have an account?
-        </div>
+        <div class="lg-bottom-title">Don't have an account?</div>
         <div class="lg-bottom-title lg-bottom-btn" (click)="login()">
             <span>{{loginPage.isLoading?'PADDING...':'LOG IN'}}</span>
         </div>
