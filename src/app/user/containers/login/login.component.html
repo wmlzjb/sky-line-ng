@@ -16,7 +16,8 @@
     <div class="lg-bottom">
         <div class="lg-bottom-title">Don't have an account?</div>
         <div class="lg-bottom-title lg-bottom-btn" (click)="login()">
-            <span>{{loginPage.isLoading?'PADDING...':'LOG IN'}}</span>
+            <!-- <span>{{loginPage.isLoading?'PADDING...':'LOG IN'}}</span> -->
+            <span>{{pending?'PADDING...':'LOG IN'}}</span>
         </div>
     </div>
 </div>

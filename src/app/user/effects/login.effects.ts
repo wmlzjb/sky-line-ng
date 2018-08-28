@@ -6,10 +6,10 @@ import { Observable, of } from 'rxjs';
 import {
     catchError,
     map,
-    switchMap,
+    exhaustMap,
     tap
 } from 'rxjs/operators';
-import * as loginActionTypes from '../actions/login';
+import { LoginActionTypes, LoginPendingAction, LoginErrorAction, LoginSuccessAction } from '../actions/login';
 import { UserService } from '../../api/user/user.service';
 
 @Injectable()
@@ -22,12 +22,13 @@ export class LoginEffects {
     @Effect()
     login$: Observable<Action> =
         this.actions$.pipe(
-            ofType<loginActionTypes.LoginPaddingAction>(loginActionTypes.LOGIN_PADDING),
+            ofType<LoginPendingAction>(LoginActionTypes.LOGIN_PENDING),
             map(action => action.payload),
-            switchMap(val => {
+            exhaustMap(val => {
+                console.log(val);
                 return this.userService.login(val).pipe(
-                    map(user => new loginActionTypes.LoginSuccessAction(user)),
-                    catchError(error => of(new loginActionTypes.LoginErrorAction(error.message)))
+                    map(user => new LoginSuccessAction({ user })),
+                    catchError(error => of(new LoginErrorAction(error.message)))
                 );
             })
         );
@@ -35,9 +36,17 @@ export class LoginEffects {
     @Effect({ dispatch: false })
     navigatDashboard$: Observable<Action> =
         this.actions$.pipe(
-            ofType<loginActionTypes.LoginSuccessAction>(loginActionTypes.LOGIN_SUCCESS),
+            ofType<LoginSuccessAction>(LoginActionTypes.LOGIN_SUCCESS),
             tap(() => {
                 this.router.navigate(['/dashboard']);
             })
         );
+
+    @Effect({ dispatch: false })
+    loginRedirect$ = this.actions$.pipe(
+        ofType(LoginActionTypes.LOGIN_Redirect, LoginActionTypes.LOGIN_OUT),
+        tap(login => {
+            this.router.navigate(['/login']);
+        })
+    );
 }

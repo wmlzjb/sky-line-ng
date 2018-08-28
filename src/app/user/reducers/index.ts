@@ -3,20 +3,43 @@ import {
     createFeatureSelector,
     ActionReducerMap,
 } from '@ngrx/store';
+import * as fromLoginPage from './login-page.reducer';
 import * as fromLogin from './login.reducer';
 import * as fromRoot from '../../reducers';
+import { LoginActions } from '../actions/login';
 
 export interface LoginState {
-    login: fromLogin.State;
+    status: fromLogin.State;
+    loginPage: fromLoginPage.State;
 }
 
 export interface State extends fromRoot.State {
     login: LoginState;
 }
 
-export const reducers: ActionReducerMap<LoginState> = {
-    login: fromLogin.reducer,
+export const reducers: ActionReducerMap<LoginState, LoginActions> = {
+    status: fromLogin.reducer,
+    loginPage: fromLoginPage.reducer,
 };
 
-export const getLoginState = createFeatureSelector<State, fromLogin.State>('login');
-export const getLogin = createSelector(getLoginState, fromLogin.getLogin);
+export const selectLoginState = createFeatureSelector<State, LoginState>('login');
+
+export const selectLoginStatusState = createSelector(
+    selectLoginState,
+    (state: LoginState) => state.status
+);
+export const getUser = createSelector(selectLoginStatusState, fromLogin.getUser);
+export const getLoggedIn = createSelector(getUser, user => !!user);
+
+export const selectLoginPageState = createSelector(
+    selectLoginState,
+    (state: LoginState) => state.loginPage
+);
+export const getLoginPageError = createSelector(
+    selectLoginPageState,
+    fromLoginPage.getError
+);
+export const getLoginPagePending = createSelector(
+    selectLoginPageState,
+    fromLoginPage.getPending
+);

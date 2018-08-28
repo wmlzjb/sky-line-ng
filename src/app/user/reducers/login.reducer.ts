@@ -1,39 +1,31 @@
-import * as login from '../actions/login';
+import { LoginActionTypes, LoginActions } from '../actions/login';
+import { User } from '../models/user';
 
 export interface State {
-    isLogin: boolean;
-    isLoading: boolean;
-    isError: boolean;
-    userInfo: any;
+    user: User | null;
 }
-const initialState: State = {
-    isLogin: false,
-    isLoading: false,
-    isError: false,
-    userInfo: null
-};
-export function reducer(state = initialState, action: login.Actions): State {
-    switch (action.type) {
-        case login.LOGIN_PADDING:
-            return Object.assign({}, state, {
-                isLoading: true,
-                isLogin: false
-            });
-        case login.LOGIN_SUCCESS:
-            return Object.assign({}, state, {
-                isLogin: true,
-                isLoading: false
-            });
-        case login.LOGIN_ERROR:
-            return Object.assign({}, state, {
-                isError: true,
-                isLogin: false,
-                isLoading: false
-            });
 
-        default:
+export const initialState: State = {
+    user: null,
+};
+
+export function reducer(state = initialState, action: LoginActions): State {
+    switch (action.type) {
+        case LoginActionTypes.LOGIN_SUCCESS: {
+            return {
+                ...state,
+                user: action.payload.user,
+            };
+        }
+
+        case LoginActionTypes.LOGIN_OUT: {
+            return initialState;
+        }
+
+        default: {
             return state;
+        }
     }
 }
 
-export const getLogin = (state: State) => state;
+export const getUser = (state: State) => state.user;
