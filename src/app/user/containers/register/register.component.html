@@ -11,12 +11,12 @@
                 <input type="password" placeholder="密码" [(ngModel)]="password" />
             </div>
         </div>
-        <div class="lg-user-btn">忘记密码?</div>
+        <div class="lg-user-btn">
+            <a routerLink="/user/login">返回</a>
+        </div>
     </div>
     <div class="lg-bottom">
-        <div class="lg-bottom-title">
-            <a routerLink="/user/register">还没有账号?</a>
-        </div>
+        <div class="lg-bottom-title"></div>
         <div class="lg-bottom-title lg-bottom-btn">
             <app-user-button [pending]="pending$ | async" (click)="login()" text="登录"></app-user-button>
         </div>

@@ -10,12 +10,15 @@ import { LoginEffects } from './effects/login.effects';
 
 import { LayoutComponent } from './containers/layout/layout.component';
 import { LoginComponent } from './containers/login/login.component';
+import { UserButtonComponent } from './components/button.component';
+import { UserRegisterComponent } from './containers/register/register.component';
 
 const routes: Routes = [
     {
         path: 'user', component: LayoutComponent,
         children: [
             { path: 'login', component: LoginComponent },
+            { path: 'register', component: UserRegisterComponent },
             { path: '', redirectTo: 'login', pathMatch: 'full' }
         ]
     }
@@ -30,7 +33,10 @@ const routes: Routes = [
     exports: [],
     declarations: [
         LayoutComponent,
-        LoginComponent
+        LoginComponent,
+        UserRegisterComponent,
+
+        UserButtonComponent
     ],
     providers: [
 

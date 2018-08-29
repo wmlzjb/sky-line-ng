@@ -36,11 +36,7 @@
                 display: flex;
                 justify-content: flex-start;
                 max-width: 80%;
-                a {
-                    color: black;
-                    font-weight: 600;
-                    text-decoration: none;
-                }
+                font-weight: 600;
                 &.lg-bottom-btn {
                     max-width: 20%;
                 }
@@ -79,6 +75,10 @@
                 justify-content: center;
                 align-items: center;
                 font-weight: 600;
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
                 .input-div {
                     width: 50%;
                 }

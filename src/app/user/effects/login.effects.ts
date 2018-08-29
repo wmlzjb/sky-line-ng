@@ -25,7 +25,6 @@ export class LoginEffects {
             ofType<LoginPendingAction>(LoginActionTypes.LOGIN_PENDING),
             map(action => action.payload),
             exhaustMap(val => {
-                console.log(val);
                 return this.userService.login(val).pipe(
                     map(user => new LoginSuccessAction({ user })),
                     catchError(error => of(new LoginErrorAction(error.message)))
