@@ -1,0 +1,14 @@
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    .sidebar-header {
+        height: 70px;
+        line-height: 70px;
+    }
+    .sidebar-column {
+        height: 100%;
+        padding-top: 3rem;
+    }
+}

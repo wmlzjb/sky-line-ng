@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard } from './services/auth-guard.service';
+import { MainNavbarComponent } from './navbar/navbar.component';
+import { MainToolbarComponent } from './toolbar/toolbar.component';
 const appRoutes: Routes = [
     {
         path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
@@ -23,7 +25,9 @@ const appRoutes: Routes = [
     ],
     exports: [],
     declarations: [
-        MainLayoutComponent
+        MainLayoutComponent,
+        MainNavbarComponent,
+        MainToolbarComponent
     ],
     providers: [],
 })
