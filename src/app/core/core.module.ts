@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { ApiModule } from '../api/api.module';
 import { AuthGuard } from './services/common/auth-guard.service';
 
@@ -11,6 +12,7 @@ import { AuthGuard } from './services/common/auth-guard.service';
     declarations: [
     ],
     providers: [
+        CookieService,
         AuthGuard
     ],
 })

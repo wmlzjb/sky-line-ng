@@ -1,5 +1,5 @@
 import { LoginModel } from './../../models/user';
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 
@@ -14,9 +14,8 @@ import { slideToRight } from '../../../animations/animation';
     animations: [slideToRight]
 })
 
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
     @HostBinding('@routerAnimate') state;
-    // private loginStateSubscription: Subscription;
     pending$ = this.store.pipe(select(fromLogin.getLoginPagePending));
     error$ = this.store.pipe(select(fromLogin.getLoginPageError));
     userName = '';
@@ -25,14 +24,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         private router: Router,
         private store: Store<fromLogin.State>
     ) {
-        // this.login$ = store.select('login');
+
     }
 
     ngOnInit() {
 
-    }
-    ngOnDestroy() {
-        // this.loginStateSubscription.unsubscribe();
     }
     login() {
         const model: LoginModel = { accountOrPhoneNumber: this.userName, password: this.password };

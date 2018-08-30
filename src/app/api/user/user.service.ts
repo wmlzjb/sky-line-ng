@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -12,6 +13,7 @@ export class UserService {
 
     constructor(
         private router: Router,
+        private cookieService: CookieService,
         private http: HttpClient
     ) { }
     login(model: LoginModel): Observable<any> {
@@ -28,5 +30,11 @@ export class UserService {
     }
     getCurrentUser = (): Observable<any> => {
         return this.http.get(this.baseUrl + '/current').pipe(map((x: any) => x.clinicAccounts[0]));
+    }
+    setTokenCookie(token: string) {
+        this.cookieService.set(environment.accessToken, token, 1);
+    }
+    getAutoToken() {
+        return `token-${new Date().toTimeString()}`;
     }
 }

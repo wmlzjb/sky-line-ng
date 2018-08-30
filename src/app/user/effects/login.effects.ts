@@ -9,7 +9,14 @@ import {
     exhaustMap,
     tap
 } from 'rxjs/operators';
-import { LoginActionTypes, LoginPendingAction, LoginErrorAction, LoginSuccessAction } from '../actions/login';
+import {
+    LoginActionTypes,
+    LoginPendingAction,
+    LoginErrorAction,
+    LoginSuccessAction,
+    LoginRedirectAction,
+    LoginTokenAction
+} from '../actions/login';
 import { UserService } from '../../api/user/user.service';
 
 @Injectable()
@@ -26,8 +33,12 @@ export class LoginEffects {
             map(action => action.payload),
             exhaustMap(val => {
                 return this.userService.login(val).pipe(
-                    map(user => new LoginSuccessAction({ user })),
-                    catchError(error => of(new LoginErrorAction(error.message)))
+                    map(user => {
+                        const token = this.userService.getAutoToken();
+                        this.userService.setTokenCookie(token);
+                        return new LoginSuccessAction({ user: user, token: token });
+                    }),
+                    catchError(error => of(new LoginErrorAction(error.error.error)))
                 );
             })
         );
@@ -46,6 +57,22 @@ export class LoginEffects {
         ofType(LoginActionTypes.LOGIN_Redirect, LoginActionTypes.LOGIN_OUT),
         tap(login => {
             this.router.navigate(['/login']);
+        })
+    );
+
+    @Effect()
+    loginToken$ = this.actions$.pipe(
+        ofType<LoginTokenAction>(LoginActionTypes.LOGIN_TOKEN),
+        map(action => action.payload),
+        exhaustMap(val => {
+            return this.userService.login({ accountOrPhoneNumber: 'sky', password: '111111' }).pipe(
+                map(user => {
+                    const token = this.userService.getAutoToken();
+                    this.userService.setTokenCookie(token);
+                    return new LoginSuccessAction({ user: user, token: token });
+                }),
+                catchError(error => of(new LoginRedirectAction()))
+            );
         })
     );
 }

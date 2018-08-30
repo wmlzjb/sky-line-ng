@@ -6,7 +6,8 @@ export enum LoginActionTypes {
     LOGIN_SUCCESS = '[Login] success',
     LOGIN_ERROR = '[Login] error',
     LOGIN_OUT = '[Login] out',
-    LOGIN_Redirect = '[Login] redirect'
+    LOGIN_Redirect = '[Login] redirect',
+    LOGIN_TOKEN = '[Login] token'
 }
 
 export class LoginPendingAction implements Action {
@@ -15,7 +16,7 @@ export class LoginPendingAction implements Action {
 }
 export class LoginSuccessAction implements Action {
     readonly type = LoginActionTypes.LOGIN_SUCCESS;
-    constructor(public payload: { user: User }) { }
+    constructor(public payload: { user: User, token: string }) { }
 }
 export class LoginErrorAction implements Action {
     readonly type = LoginActionTypes.LOGIN_ERROR;
@@ -27,11 +28,15 @@ export class LoginRedirectAction implements Action {
 export class LogoutAction implements Action {
     readonly type = LoginActionTypes.LOGIN_OUT;
 }
-
+export class LoginTokenAction implements Action {
+    readonly type = LoginActionTypes.LOGIN_TOKEN;
+    constructor(public payload: any) { }
+}
 
 export type LoginActions
     = LoginPendingAction
     | LoginSuccessAction
     | LoginErrorAction
     | LoginRedirectAction
-    | LogoutAction;
+    | LogoutAction
+    | LoginTokenAction;

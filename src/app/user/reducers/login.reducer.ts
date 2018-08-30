@@ -3,10 +3,12 @@ import { User } from '../models/user';
 
 export interface State {
     user: User | null;
+    token: string | null;
 }
 
 export const initialState: State = {
     user: null,
+    token: null
 };
 
 export function reducer(state = initialState, action: LoginActions): State {
@@ -15,6 +17,14 @@ export function reducer(state = initialState, action: LoginActions): State {
             return {
                 ...state,
                 user: action.payload.user,
+                token: action.payload.token
+            };
+        }
+
+        case LoginActionTypes.LOGIN_TOKEN: {
+            return {
+                ...state,
+                token: action.payload.token
             };
         }
 
