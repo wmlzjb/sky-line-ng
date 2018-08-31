@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { slideToRight } from '../../../animations/animation';
+import { slideToRight } from '../../../animations/slide-to-right';
 
 @Component({
     selector: 'app-user-register',

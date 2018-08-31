@@ -1,6 +1,6 @@
 <div class="main-container">
-    <div class="main-navbar-container">
-        <app-main-navbar></app-main-navbar>
+    <div class="main-navbar-container" [@collapseToLeft]="sideStatus">
+        <app-main-navbar [sideStatus]="showSidenav$|async"></app-main-navbar>
     </div>
     <div class="main-right-container">
         <div class="main-toolbar-container">

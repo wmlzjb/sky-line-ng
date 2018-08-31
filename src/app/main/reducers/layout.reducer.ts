@@ -8,7 +8,7 @@ export interface State {
 }
 
 const initialState: State = {
-    showSidenav: false,
+    showSidenav: true,
 };
 
 export function reducer(

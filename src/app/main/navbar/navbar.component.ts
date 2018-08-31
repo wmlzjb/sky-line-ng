@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as LayoutActions from '../actions/layout.actions';
+import * as fromRoot from '../../reducers';
 
 @Component({
     selector: 'app-main-navbar',
@@ -7,7 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MainNavbarComponent implements OnInit {
-    constructor() { }
+    @Input() sideStatus: boolean;
+    constructor(private store: Store<fromRoot.State>) {
 
-    ngOnInit() { }
+    }
+
+    ngOnInit() {
+
+    }
+    toggleSide() {
+        this.sideStatus = !this.sideStatus;
+        if (this.sideStatus) {
+            this.store.dispatch(new LayoutActions.OpenSidenav());
+        } else {
+            this.store.dispatch(new LayoutActions.CloseSidenav());
+        }
+    }
 }

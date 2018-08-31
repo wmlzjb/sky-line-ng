@@ -5,7 +5,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as fromLogin from '../../reducers';
 import * as login from '../../actions/login';
-import { slideToRight } from '../../../animations/animation';
+import { slideToRight } from '../../../animations/slide-to-right';
 
 @Component({
     selector: 'app-user-new-ui-login',

@@ -16,7 +16,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
             height: 100%;
             justify-content: center;
             color: rgb(246, 221, 179);
-            font-size: 16px;
+            font-size: 22px;
             cursor: pointer;
         }
     `]

@@ -3,12 +3,13 @@
     flex-direction: row;
     height: 100%;
     width: 100%;
+    color: rgb(120, 144, 156);
     .main-navbar-container {
         flex: 1 1 100%;
         max-width: 20rem;
         height: 100%;
-        background-color: rgb(254, 254, 254);
-        box-shadow: 6px 0 8px rgb(240, 242, 243);
+        background-color: rgb(254, 254, 254); // box-shadow: 6px 0 8px rgb(240, 242, 243);
+        box-shadow: 0 0 8px rgba(0, 0, 0, .14), 0 4px 16px rgba(0, 0, 0, .12);
         position: relative;
         z-index: 1;
     }

@@ -6,6 +6,9 @@
     .sidebar-header {
         height: 70px;
         line-height: 70px;
+        .side-btn{
+            cursor: pointer;
+        }
     }
     .sidebar-column {
         height: 100%;
