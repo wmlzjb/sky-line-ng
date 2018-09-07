@@ -6,12 +6,17 @@
     .sidebar-header {
         height: 70px;
         line-height: 70px;
-        .side-btn{
+        .side-btn {
             cursor: pointer;
         }
     }
     .sidebar-column {
         height: 100%;
         padding-top: 3rem;
+        // .sidebar-item {
+        //     span {
+        //         opacity: 1;
+        //     }
+        // }
     }
 }

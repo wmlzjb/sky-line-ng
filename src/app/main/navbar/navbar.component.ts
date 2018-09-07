@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as LayoutActions from '../actions/layout.actions';
 import * as fromRoot from '../../reducers';
+import { opacity } from '../../animations/collapse-to-left';
 
 @Component({
     selector: 'app-main-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss']
+    styleUrls: ['./navbar.component.scss'],
+    animations: [opacity]
 })
 
 export class MainNavbarComponent implements OnInit {
